@@ -6,6 +6,16 @@
   box-sizing: border-box;
   outline: none;
 }
+button, input{
+  cursor: pointer;
+}
+.messages{
+  position:absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.6);
+  z-index: 2;
+}
 body{
   background-color: #aaa;
   height: 100vh;
@@ -27,6 +37,23 @@ body{
 }
 .title.yellow{
   color: yellow;
+}
+
+.message::after {
+  content: attr(data-message);
+  font-family: 'Press Start 2P';
+  font-size: 4rem;
+  text-align: center;
+  padding: 20% 0;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  z-index: 9998;
 }
 
 .menu {
@@ -98,13 +125,13 @@ body{
   transition: all 500ms ease-in-out;
 }
 .onOffBtn.on{
-  background-color: #D26700;
+  background-color: #0099D6;
 }
 .game-wrapper {  
   position: relative;
   margin: 0px auto;
   width: 70vw;
-  max-width: 300px;
+  max-width: 400px;
   height: 62vh;
   padding: 3vmax;
   display: grid;
