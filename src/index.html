@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <h3 style="text-align: center; letter-spacing: 2px; margin-top: 20px;">Simon</h3>
+  <h1 style="text-align: center;"><span class="title red">G</span><span class="title green">A</span><span class="title blue">M</span><span class="title yellow">E</span></h1>
+  <div id="board">
+    <span>ROUND: <span id="round-score"></span></span>
+    <span>STEP: <span id="step-score"></span></span>
+  </div>
+  <div class="menu">
+    <div>
+      <p style="text-align: center;">Difficult:</p>    
+        <button class="difficult first" data-value="easy">Easy</button>
+        <button class="difficult active" data-value="normal">Normal</button>
+        <button class="difficult last" data-value="hard">Hard</button>
+    </div>
+    <div>
+      <p style="text-align: center;">Mode:</p>
+      <input type="checkbox" id="strict" name="strict" value="true">
+      <label for="strict">Strict</label>
+    </div>
+  </div>
+  <div class="game-wrapper">
+    <button class="onOffBtn" id="onOffBtn"></button>
+    <button id="red" class="btn" disabled></button>
+    <button id="blue" class="btn" disabled></button>
+    <button id="green" class="btn" disabled></button>
+    <button id="yellow" class="btn" disabled></button>
+  </div>
+</body>
+
+</html>
