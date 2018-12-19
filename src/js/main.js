@@ -1,24 +1,23 @@
-import "../css/style.css";
+import '../css/style.css';
 
-const gameValues = {
-  round: 1,
-  currentIndex: 0,
-  isRunning: false,
-  isStrict: false,
-  colorSequence: randomColor(20),
-  difficult: "normal",
-  difficultMap: {
+let currentIndex = 0;
+let round = 1;
+let isRunning = false;
+let isStrict = false;
+let colorSequence = randomColor(20);
+let difficult = "normal";
+let difficultMap = {
     normal: 300,
     easy: 400,
     hard: 150
-  },
-  sound: {
+  };
+let sound = {
     blue: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"),
     red: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"),
     yellow: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"),
     green: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3")
   }
-};
+
 
 const btns = document.querySelectorAll(".btn");
 const board = document.getElementById("board");
@@ -26,33 +25,29 @@ const menu = document.querySelector(".menu");
 const roundScore = document.getElementById("round-score");
 const stepScore = document.getElementById("step-score");
 const onOffBtn = document.getElementById("onOffBtn");
-const difficult = document.querySelectorAll(".difficult");
+const difficultSelector = document.querySelectorAll(".difficult");
 const strictMode = document.getElementById("strict");
 
 btns.forEach(btn => btn.addEventListener("click", playerTurn));
 onOffBtn.addEventListener("click", toggleOnOff);
-difficult.forEach(btn => btn.addEventListener("click", selectDifficult));
+difficultSelector.forEach(btn => btn.addEventListener("click", selectDifficult));
 
 function selectDifficult(event) {
-  gameValues.difficult = event.target.dataset.value;
+  difficult = event.target.dataset.value;
   document.querySelector("[data-value].active").classList.remove("active");
   event.target.classList.add("active");
 }
 
-function playBtn(event, turn) {
+function playBtn(event) {
   const btn = document.getElementById(event);
-  gameValues.sound[event].currentTime = 0;
-  gameValues.sound[event].play();
+  sound[event].currentTime = 0;
+  sound[event].play();
   btn.style.backgroundColor = event;
   btn.classList.add("playBtn");
-  setTimeout(() => {     
+  setTimeout(() => {
     document.getElementById(event).style.backgroundColor = "transparent";
     document.getElementById(event).classList.remove("playBtn");
-    if(turn === 'player'){
-      verifyColor(event);
-    }
-  }, gameValues.difficultMap[gameValues.difficult]);
-    
+  }, difficultMap[difficult]);
 }
 function randomColor(number) {
   let arrColor = [];
@@ -71,70 +66,74 @@ function randomColor(number) {
 function playSequence() {
   let i = 0;
   let move = setInterval(function() {
-    playBtn(gameValues.colorSequence[i], 'machine');
+    playBtn(colorSequence[i]);
     i++;
-    if (gameValues.round <= i) {
-      clearInterval(move);     
+    if (round <= i) {
+      clearInterval(move);
     }
-  }, gameValues.difficultMap[gameValues.difficult] * 2);
-  
+  }, difficultMap[difficult] * 2);
 }
 
-
 function verifyColor(color) {
-
-    if (color !== gameValues.colorSequence[gameValues.currentIndex]) {
-      if (gameValues.isStrict) {
-        gameValues.round = 1;
-        gameValues.currentIndex = 0;
-        gameValues.colorSequence = randomColor(20);
-      }
-      alert('WRONG');
-      return init();
-      
+  setTimeout(() => {
+    if (color !== colorSequence[currentIndex]) {
+    if (isStrict) {
+      round = 1;
+      currentIndex = 0;
+      colorSequence = randomColor(20);
     }
-    gameValues.currentIndex++;
-    if (gameValues.currentIndex >= gameValues.round) {
-      gameValues.round++;
-      alert('next')
-      init();   
-    }
-    roundScore.innerHTML = gameValues.round;
-    stepScore.innerHTML = gameValues.currentIndex;
- 
+      document.body.setAttribute('data-message', 'WRONG!!!')
+    document.body.classList.add("on");
+    setTimeout(() => {
+      document.body.classList.remove("on");
+      init();
+    }, 800);
+  } else {
+    currentIndex++;  
+    if (currentIndex >= round) {
+      round++;
+      document.body.classList.add("on");
+      document.body.setAttribute('data-message', `Round ${round}`)
+      setTimeout(() => {
+      document.body.classList.remove("on");
+      init();
+    }, 800);      
+    }    
+  }  
+  },200);
 }
 
 function playerTurn(event) {
+  stepScore.innerHTML = currentIndex + 1;
   const color = event.target.id;
-  playBtn(color, 'player');  
+  playBtn(color);
+  verifyColor(color);  
 }
 
 function init() {
-  gameValues.currentIndex = 0;
-  roundScore.innerHTML = gameValues.round;
-  stepScore.innerHTML = gameValues.currentIndex;
-  playSequence();
+  currentIndex = 0;
+  roundScore.innerHTML = round;
+  stepScore.innerHTML = currentIndex;
+  setTimeout(() => {playSequence();}, 100);
 }
 
 function toggleOnOff() {
   btns.forEach(btn => (btn.disabled = !btn.disabled));
-  difficult.forEach(btn => (btn.disabled = !btn.disabled));
+  difficultSelector.forEach(btn => (btn.disabled = !btn.disabled));
   onOffBtn.classList.toggle("on");
   board.classList.toggle("on");
   menu.classList.toggle("on");
-  if (!gameValues.isRunning) {
-    gameValues.isStrict = strictMode.checked;
-    strictMode.disabled = true;
-    difficult.disabled = true;
+  if (!isRunning) {
+    isStrict = strictMode.checked;
     init();
   } else {
-    gameValues.round = 1;
-    gameValues.currentIndex = 0;
-    gameValues.colorSequence = randomColor(20);
+    round = 1;
+    currentIndex = 0;
+    colorSequence = randomColor(20);
     roundScore.innerHTML = null;
     stepScore.innerHTML = null;
   }
-  gameValues.isRunning = !gameValues.isRunning;
-  strictMode.disabled = gameValues.isRunning;
-  difficult.disabled = gameValues.isRunning;
+  isRunning = !isRunning;
+  strictMode.disabled = isRunning;
+  difficultSelector.disabled = isRunning;
 }
