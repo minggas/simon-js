@@ -8,7 +8,7 @@ module.exports = {
     filename: "js/bundle.js"
   },
   devServer: {
-    contentBase: "./dist",
+    contentBase: path.join(__dirname, 'src'),
     port: 9000
   },
   plugins: [
