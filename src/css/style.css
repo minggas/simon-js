@@ -1,47 +1,54 @@
-@import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+@import url("https://fonts.googleapis.com/css?family=Press+Start+2P");
 
-*, * ::after, *::before {
+*,
+* ::after,
+*::before {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  outline: none;
+  outline: unset;
 }
-button, input{
+button,
+input {
   cursor: pointer;
 }
-.messages{
-  position:absolute;
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
+.messages {
+  position: absolute;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0, 0, 0, 0.6);
   z-index: 2;
 }
-body{
+body {
   background-color: #aaa;
   height: 100vh;
-  
 }
 
 .title {
-  font-family: 'Press Start 2P';
+  font-family: "Press Start 2P";
   font-size: 3rem;
 }
-.title.red{
+.title.red {
   color: red;
 }
-.title.green{
+.title.green {
   color: green;
 }
-.title.blue{
+.title.blue {
   color: blue;
 }
-.title.yellow{
+.title.yellow {
   color: yellow;
 }
 .message::after {
   opacity: 0;
   content: attr(data-message);
-  font-family: 'Press Start 2P';
+  font-family: "Press Start 2P";
   width: 100vw;
   height: 100vh;
   font-size: 4rem;
@@ -56,9 +63,9 @@ body{
   transition: opacity 400ms ease-in;
 }
 
-.message.on::after {  
+.message.on::after {
   opacity: 1;
-  z-index: 9998;  
+  z-index: 9998;
 }
 
 .menu {
@@ -75,7 +82,7 @@ body{
   margin: 0 10px;
 }
 
-.difficult {  
+.difficult {
   padding: 0.5rem 1rem;
   line-height: 0.5rem;
   font-size: 0.9rem;
@@ -93,7 +100,7 @@ body{
   border-radius: 0 10px 10px 0;
 }
 
-.difficult.active{
+.difficult.active {
   background-color: green;
 }
 
@@ -106,15 +113,15 @@ body{
   max-width: 300px;
   padding: 5px 10px;
   font-size: 1rem;
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
   color: #999;
   transition: all 500ms ease-in-out;
 }
-#board.on{
+#board.on {
   color: rgb(49, 48, 0);
 }
 
-.onOffBtn{
+.onOffBtn {
   position: absolute;
   top: 42%;
   left: 42%;
@@ -126,13 +133,16 @@ body{
   border: none;
   font-size: 1.5rem;
   background-color: #777;
-  -webkit-mask-box-image: url('https://cdn0.iconfinder.com/data/icons/basic-ui-elements-plain/523/012_power-512.png');
+  mask: url("https://cdn0.iconfinder.com/data/icons/basic-ui-elements-plain/523/012_power-512.png");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
   transition: all 500ms ease-in-out;
 }
-.onOffBtn.on{
-  background-color: #0099D6;
+.onOffBtn.on {
+  background-color: #0099d6;
 }
-.game-wrapper {  
+.game-wrapper {
   position: relative;
   margin: 0px auto;
   width: 70vw;
@@ -145,26 +155,24 @@ body{
   grid-gap: 3vmax;
 }
 .btn {
-  border-radius: 35px; 
+  border-radius: 35px;
   background-color: transparent;
   transition: all 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .btn.playBtn {
   transform: scale(0.8);
-
 }
 
-#red{
+#red {
   border: 5px solid red;
 }
-#green{
+#green {
   border: 5px solid green;
 }
-#blue{
+#blue {
   border: 5px solid blue;
 }
-#yellow{
+#yellow {
   border: 5px solid yellow;
 }
-
