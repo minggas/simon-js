@@ -39,15 +39,20 @@ function selectDifficult(event) {
 }
 
 function playBtn(event) {
+  const val = currentIndex
   const btn = document.getElementById(event);
   sound[event].currentTime = 0;
   sound[event].play();
   btn.style.backgroundColor = event;
   btn.classList.add("playBtn");
+  return new Promise((res, rej) => {
   setTimeout(() => {
     document.getElementById(event).style.backgroundColor = "transparent";
-    document.getElementById(event).classList.remove("playBtn");
+    document.getElementById(event).classList.remove("playBtn"); 
+    res(++currentIndex)  
   }, difficultMap[difficult]);
+});
+  
 }
 function randomColor(number) {
   let arrColor = [];
@@ -65,14 +70,12 @@ function randomColor(number) {
 
 function playSequence() {
   let i = 0;
-  let move = setInterval(function() {
-    playBtn(colorSequence[i]);
-    i++;
-    if (round <= i) {
-      clearInterval(move);
-    }
-  }, difficultMap[difficult] * 2);
-}
+while(round >= i){
+    playBtn(colorSequence[i]).then((val) => i = val);
+      console.log(i);
+    }  
+  }
+
 
 function verifyColor(color) {
   setTimeout(() => {
@@ -114,7 +117,7 @@ function init() {
   currentIndex = 0;
   roundScore.innerHTML = round;
   stepScore.innerHTML = currentIndex;
-  setTimeout(() => {playSequence();}, 100);
+  playSequence();
 }
 
 function toggleOnOff() {
