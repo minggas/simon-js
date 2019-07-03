@@ -2,17 +2,19 @@
   "name": "simon-js",
   "version": "1.0.0",
   "description": "Simon Game made with JS",
-  "main": "index.html",
+  "main": "index.js",
   "repository": "https://github.com/minggas/simon-js",
   "author": "minggas",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.2.0",
-    "@babel/preset-env": "^7.2.0",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
     "autoprefixer": "^9.4.3",
-    "babel-loader": "^8.0.4",
+    "babel-loader": "^8.0.6",
     "css-loader": "^2.0.1",
     "file-loader": "^2.0.0",
+    "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "postcss-loader": "^3.0.0",
     "style-loader": "^0.23.1",
@@ -21,8 +23,13 @@
     "webpack-dev-server": "^3.1.10"
   },
   "scripts": {
+    "start": "webpack-dev-server --open --mode development",
     "dev": "webpack-dev-server --mode development",
     "test": "jest",
     "build": "webpack --mode production"
+  },
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   }
 }
