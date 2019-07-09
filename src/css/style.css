@@ -69,6 +69,8 @@ body {
 }
 
 .menu {
+  max-width: 400px;
+  margin: 0 auto;
   padding: 0rem 0.2rem;
   display: flex;
   justify-content: space-evenly;
