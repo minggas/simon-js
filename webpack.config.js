@@ -15,15 +15,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: "index.html",
       template: "./src/index.html",
-      publicPath: "/docs/",
+      publicPath: "/simon-js/",
     }),
   ],
   module: {
     rules: [
-      {
-        test: /\.mp3$/,
-        loader: "file-loader",
-      },
       {
         test: /\.js$/,
         exclude: /node_modules/,

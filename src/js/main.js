@@ -1,9 +1,13 @@
+window.AudioContext = window.AudioContext || window.webkitAudioContext;
+
 import "../css/style.css";
 import "../assets/012_power-512.png";
-import blue from "../assets/simonSound1.mp3";
-import red from "../assets/simonSound2.mp3";
-import yellow from "../assets/simonSound3.mp3";
-import green from "../assets/simonSound4.mp3";
+
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+const context = new AudioContext();
+
+let o = null;
+let g = null;
 
 let currentIndex = 0;
 let round = 1;
@@ -11,16 +15,17 @@ let isRunning = false;
 let isStrict = false;
 let colorSequence = randomColor(20);
 let difficult = "normal";
-let difficultMap = {
+const difficultMap = {
   normal: 200,
   easy: 400,
   hard: 100,
 };
-let sound = {
-  blue: new Audio(blue),
-  red: new Audio(red),
-  yellow: new Audio(yellow),
-  green: new Audio(green),
+
+const sound = {
+  blue: 329.6,
+  red: 261.6,
+  yellow: 392.0,
+  green: 349.2,
 };
 
 const btns = document.querySelectorAll(".btn");
@@ -45,10 +50,20 @@ function selectDifficult(event) {
   event.target.classList.add("active");
 }
 
+function padSound(type, x, freq) {
+  o = context.createOscillator();
+  g = context.createGain();
+  o.frequency.value = freq;
+  o.connect(g);
+  o.type = type;
+  g.connect(context.destination);
+  o.start(0);
+  g.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + x);
+}
+
 function playBtn(event) {
   const btn = document.getElementById(event);
-  sound[event].currentTime = 0;
-  sound[event].play();
+  padSound("sine", 0.8, sound[event]);
   btn.style.backgroundColor = event;
   btn.classList.add("playBtn");
   setTimeout(() => {
