@@ -62,14 +62,19 @@ function padSound(type, x, freq) {
 }
 
 function playBtn(event) {
+  const val = currentIndex
   const btn = document.getElementById(event);
   padSound("sine", 0.8, sound[event]);
   btn.style.backgroundColor = event;
   btn.classList.add("playBtn");
+  return new Promise((res, rej) => {
   setTimeout(() => {
     document.getElementById(event).style.backgroundColor = "transparent";
-    document.getElementById(event).classList.remove("playBtn");
+    document.getElementById(event).classList.remove("playBtn"); 
+    res(++currentIndex)  
   }, difficultMap[difficult]);
+});
+  
 }
 function randomColor(number) {
   let arrColor = [];
