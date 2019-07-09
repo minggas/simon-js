@@ -2,30 +2,43 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="description" content="Simon Game" />
+  <title>Simon Game</title>
+  <meta property="og:title" content="Simon Game" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://minggas.github.io/simon-js/" />
+  <meta property="og:description" content="Simon Game" />
+  <meta property="og:image:width" content="590" />
+  <meta property="og:image:height" content="440" />
+  <meta property="og:site_name" content="Simon Game" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:description" content="Simon Game" />
+  <meta name="twitter:title" content="Simon Game" />
+  <meta name="twitter:site" content="@minggasweb" />
+  <meta name="twitter:creator" content="@minggasweb" />
 </head>
 
 <body class="message">
-  <h3 style="text-align: center; letter-spacing: 2px; margin-top: 20px;">Simon</h3>
-  <h1 style="text-align: center;"><span class="title red">G</span><span class="title green">A</span><span class="title blue">M</span><span class="title yellow">E</span></h1>
+  <h3 style="text-align: center; letter-spacing: 2px; padding-top: 20px;">Simon</h3>
+  <h1 style="text-align: center;"><span class="title red">G</span><span class="title green">A</span><span
+      class="title blue">M</span><span class="title yellow">E</span></h1>
   <div id="board">
     <span>ROUND: <span id="round-score"></span></span>
     <span>STEP: <span id="step-score"></span></span>
   </div>
   <div class="menu">
     <div>
-      <p style="text-align: center;">Difficult:</p>    
-        <button class="difficult first" data-value="easy">Easy</button>
-        <button class="difficult active" data-value="normal">Normal</button>
-        <button class="difficult last" data-value="hard">Hard</button>
+      <p style="text-align: center;">Difficult:</p>
+      <button class="difficult first" data-value="easy">Easy</button>
+      <button class="difficult active" data-value="normal">Normal</button>
+      <button class="difficult last" data-value="hard">Hard</button>
     </div>
     <div>
       <p style="text-align: center;">Mode:</p>
-      <input type="checkbox" id="strict" name="strict" value="true">
-      <label for="strict">Strict</label>
+      <button class="difficult" id="strict">Strict</button>
     </div>
   </div>
   <div class="game-wrapper">
