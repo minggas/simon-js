@@ -1,13 +1,39 @@
 @import url("https://fonts.googleapis.com/css?family=Press+Start+2P");
 
+*:root {
+  --red: rgb(196, 9, 9);
+  --green: rgb(24, 194, 24);
+  --blue: rgb(2, 2, 194);
+  --yellow: rgb(198, 236, 26);
+  --primary-color: rgb(231, 231, 231);
+  --primary-bg: rgba(0, 0, 0, 0.911);
+  --secondary-color: rgba(25,25,25,1);
+  --main-bg: rgb(196, 192, 192);
+  --secondary-bg: rgba(116, 111, 111,1);
+  --active-color: rgb(3, 95, 14);
+}
+
 *,
 * ::after,
-*::before {
+*::before,
+*:active,
+*:hover {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   outline: unset;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
+
+*:disabled {
+  cursor: default;
+  opacity: 0.1;
+}
+
+*.active:disabled {
+  opacity: 0.7;
+}
+
 button,
 input {
   cursor: pointer;
@@ -21,12 +47,14 @@ button::-moz-focus-inner {
   position: absolute;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: var(--primary-bg);
   z-index: 2;
 }
-body {
-  background-color: #aaa;
+body, html {
+  background-color: var(--main-bg);
   height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 .title {
@@ -34,16 +62,16 @@ body {
   font-size: 3rem;
 }
 .title.red {
-  color: red;
+  color: var(--red);
 }
 .title.green {
-  color: green;
+  color: var(--green);
 }
 .title.blue {
-  color: blue;
+  color: var(--blue);
 }
 .title.yellow {
-  color: yellow;
+  color: var(--yellow);
 }
 .message::after {
   opacity: 0;
@@ -51,11 +79,11 @@ body {
   font-family: "Press Start 2P";
   width: 100vw;
   height: 100vh;
-  font-size: 4rem;
+  font-size: 2rem;
   text-align: center;
-  padding: 20% 0;
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
+  padding: 40vh 0;
+  background: var(--primary-bg);
+  color: var(--primary-color);
   position: absolute;
   top: 0;
   left: 0;
@@ -85,8 +113,8 @@ body {
   padding: 0.5rem 1rem;
   line-height: 0.5rem;
   font-size: 0.9rem;
-  background-color: #777;
-  color: white;
+  background-color: var(--secondary-bg);
+  color: var(--primary-color);
   border: none;
   border-radius: 4px;
   letter-spacing: 1.5px;
@@ -100,7 +128,7 @@ body {
 }
 
 .difficult.active {
-  background-color: green;
+  background-color: var(--active-color);
 }
 
 #board {
@@ -113,11 +141,13 @@ body {
   padding: 5px 10px;
   font-size: 1rem;
   font-family: "Press Start 2P", cursive;
-  color: #999;
+  color: var(--secondary-color);
   transition: all 500ms ease-in-out;
+  opacity: 0.1;
 }
 #board.on {
   color: rgb(49, 48, 0);
+  opacity: 1;
 }
 
 .onOffBtn {
@@ -132,7 +162,7 @@ body {
   border: none;
   font-size: 1.5rem;
   background-color: #777;
-  mask: url("https://cdn0.iconfinder.com/data/icons/basic-ui-elements-plain/523/012_power-512.png");
+  mask: url("/docs/012_power-512.png");
   mask-size: contain;
   mask-repeat: no-repeat;
   mask-position: center;

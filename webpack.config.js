@@ -5,35 +5,47 @@ module.exports = {
   entry: ["./src/js/main.js"],
   output: {
     path: path.resolve(__dirname, "docs"),
-    filename: "js/bundle.js"
+    filename: "js/bundle.js",
   },
   devServer: {
-    contentBase: path.join(__dirname, 'src'),
-    port: 9000
+    contentBase: path.join(__dirname, "src"),
+    port: 9000,
   },
   plugins: [
     new HtmlWebpackPlugin({
       filename: "index.html",
-      template: "./src/index.html"
-    })
+      template: "./src/index.html",
+      publicPath: "/docs/",
+    }),
   ],
   module: {
     rules: [
       {
+        test: /\.mp3$/,
+        loader: "file-loader",
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
-        }
+          loader: "babel-loader",
+        },
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader", "postcss-loader"]
+        use: ["style-loader", "css-loader", "postcss-loader"],
       },
       {
         test: /\.(png|jpg|gif|jpeg|svg)$/,
-        use: ['file-loader']
-      }
-    ]
-  }
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[name].[ext]",
+            },
+          },
+        ],
+      },
+    ],
+  },
 };
