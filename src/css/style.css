@@ -69,17 +69,14 @@ body {
 }
 
 .menu {
-  padding: 0rem 1rem;
+  padding: 0rem 0.2rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   transition: all 500ms ease-in-out;
 }
 .menu.on {
   opacity: 0.4;
-}
-.menu > * {
-  margin: 0 10px;
 }
 
 .difficult {
@@ -144,7 +141,7 @@ body {
 }
 .game-wrapper {
   position: relative;
-  margin: 0px auto;
+  margin: 20px auto;
   width: 70vw;
   max-width: 400px;
   height: 62vh;
