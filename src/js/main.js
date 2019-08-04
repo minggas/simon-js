@@ -57,8 +57,9 @@ function padSound(type, x, freq) {
   o.connect(g);
   o.type = type;
   g.connect(context.destination);
-  o.start(0);
+  o.start();
   g.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + x);
+  o.stop(1);
 }
 
 function playBtn(event) {
