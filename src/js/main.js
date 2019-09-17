@@ -1,13 +1,9 @@
-window.AudioContext = window.AudioContext || window.webkitAudioContext;
-
 import "../css/style.css";
 import "../assets/012_power-512.png";
-
-const AudioContext = window.AudioContext || window.webkitAudioContext;
-const context = new AudioContext();
-
-let o = null;
-let g = null;
+import "../assets/simonSound1.mp3";
+import "../assets/simonSound2.mp3";
+import "../assets/simonSound3.mp3";
+import "../assets/simonSound4.mp3";
 
 let currentIndex = 0;
 let round = 1;
@@ -18,14 +14,14 @@ let difficult = "normal";
 const difficultMap = {
   normal: 200,
   easy: 400,
-  hard: 100,
+  hard: 100
 };
 
 const sound = {
-  blue: 329.6,
-  red: 261.6,
-  yellow: 392.0,
-  green: 349.2,
+  blue: new Audio("../assets/simonSound1.mp3"),
+  red: new Audio("../assets/simonSound2.mp3"),
+  yellow: new Audio("../assets/simonSound3.mp3"),
+  green: new Audio("../assets/simonSound4.mp3")
 };
 
 const btns = document.querySelectorAll(".btn");
@@ -37,11 +33,16 @@ const onOffBtn = document.getElementById("onOffBtn");
 const difficultSelector = document.querySelectorAll(".difficult");
 const strictMode = document.getElementById("strict");
 
+strictMode.addEventListener("click", e => {
+  e.target.classList.toggle("active");
+  isStrict = !isStrict;
+});
+
 btns.forEach(btn => (btn.disabled = true));
 btns.forEach(btn => btn.addEventListener("click", playerTurn));
 onOffBtn.addEventListener("click", toggleOnOff);
 difficultSelector.forEach(btn =>
-  btn.addEventListener("click", selectDifficult),
+  btn.addEventListener("click", selectDifficult)
 );
 
 function selectDifficult(event) {
@@ -50,31 +51,20 @@ function selectDifficult(event) {
   event.target.classList.add("active");
 }
 
-function padSound(type, x, freq) {
-  o = context.createOscillator();
-  g = context.createGain();
-  o.frequency.value = freq;
-  o.connect(g);
-  o.type = type;
-  g.connect(context.destination);
-  o.start(0);
-  g.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + x);
-}
-
 function playBtn(event) {
-  const val = currentIndex
+  const val = currentIndex;
   const btn = document.getElementById(event);
-  padSound("sine", 0.8, sound[event]);
+  sound[event].currentTime = 0;
+  sound[event].play();
   btn.style.backgroundColor = event;
   btn.classList.add("playBtn");
   return new Promise((res, rej) => {
-  setTimeout(() => {
-    document.getElementById(event).style.backgroundColor = "transparent";
-    document.getElementById(event).classList.remove("playBtn"); 
-    res(++currentIndex)  
-  }, difficultMap[difficult]);
-});
-  
+    setTimeout(() => {
+      document.getElementById(event).style.backgroundColor = "transparent";
+      document.getElementById(event).classList.remove("playBtn");
+      res(currentIndex);
+    }, difficultMap[difficult]);
+  });
 }
 function randomColor(number) {
   let arrColor = [];
@@ -82,7 +72,7 @@ function randomColor(number) {
     0: "red",
     1: "blue",
     2: "green",
-    3: "yellow",
+    3: "yellow"
   };
   for (let i = 0; i < number; i++) {
     arrColor.push(colorMap[Math.floor(Math.random() * Math.floor(4))]);
@@ -109,7 +99,7 @@ function verifyColor(color) {
       if (isStrict) {
         round = 1;
         currentIndex = 0;
-        colorSequence = randomColor(20);
+        colorSequence = randomColor(5000);
       }
       document.body.setAttribute("data-message", "WRONG!!!");
       document.body.classList.add("on");
@@ -129,7 +119,7 @@ function verifyColor(color) {
         }, 600);
       }
     }
-  }, 50);
+  }, 100);
 }
 
 function playerTurn(event) {
@@ -155,12 +145,11 @@ function toggleOnOff() {
   board.classList.toggle("on");
   menu.classList.toggle("on");
   if (!isRunning) {
-    isStrict = strictMode.checked;
     init();
   } else {
     round = 1;
     currentIndex = 0;
-    colorSequence = randomColor(20);
+    colorSequence = randomColor(5000);
     roundScore.innerHTML = null;
     stepScore.innerHTML = null;
   }

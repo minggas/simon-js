@@ -7,9 +7,9 @@
   --yellow: rgb(198, 236, 26);
   --primary-color: rgb(231, 231, 231);
   --primary-bg: rgba(0, 0, 0, 0.911);
-  --secondary-color: rgba(25,25,25,1);
+  --secondary-color: rgba(25, 25, 25, 1);
   --main-bg: rgb(196, 192, 192);
-  --secondary-bg: rgba(116, 111, 111,1);
+  --secondary-bg: rgba(116, 111, 111, 1);
   --active-color: rgb(3, 95, 14);
 }
 
@@ -22,7 +22,7 @@
   padding: 0;
   box-sizing: border-box;
   outline: unset;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 *:disabled {
@@ -50,7 +50,8 @@ button::-moz-focus-inner {
   background-color: var(--primary-bg);
   z-index: 2;
 }
-body, html {
+body,
+html {
   background-color: var(--main-bg);
   height: 100vh;
   margin: 0;
@@ -109,7 +110,7 @@ body, html {
   opacity: 0.4;
 }
 
-.difficult {
+.menu-btns {
   padding: 0.5rem 1rem;
   line-height: 0.5rem;
   font-size: 0.9rem;
@@ -119,15 +120,15 @@ body, html {
   border-radius: 4px;
   letter-spacing: 1.5px;
 }
-.difficult.first {
+.menu-btns.first {
   border-radius: 10px 0 0 10px;
 }
 
-.difficult.last {
+.menu-btns.last {
   border-radius: 0 10px 10px 0;
 }
 
-.difficult.active {
+.menu-btns.active {
   background-color: var(--active-color);
 }
 
